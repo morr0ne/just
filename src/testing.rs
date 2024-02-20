@@ -8,11 +8,11 @@ pub(crate) fn config(args: &[&str]) -> Config {
   let mut args = Vec::from(args);
   args.insert(0, "just");
 
-  let app = Config::app();
+  let command = Config::command();
 
-  let matches = app.get_matches_from_safe(args).unwrap();
+  let mut matches = command.get_matches_from(args);
 
-  Config::from_matches(&matches).unwrap()
+  Config::from_matches(&mut matches).unwrap()
 }
 
 pub(crate) fn search(config: &Config) -> Search {

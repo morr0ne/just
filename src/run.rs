@@ -13,12 +13,12 @@ pub fn run() -> Result<(), i32> {
   )
   .init();
 
-  let app = Config::app();
+  let command = Config::command();
 
   info!("Parsing command line arguments…");
-  let matches = app.get_matches();
+  let mut matches = command.get_matches();
 
-  let config = Config::from_matches(&matches).map_err(Error::from);
+  let config = Config::from_matches(&mut matches).map_err(Error::from);
 
   let (color, verbosity) = config
     .as_ref()
